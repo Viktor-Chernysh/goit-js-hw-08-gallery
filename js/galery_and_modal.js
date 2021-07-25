@@ -38,7 +38,7 @@ function onImgClick(e) {
 function openModal(e) {
   document.addEventListener('keydown', onEscapeCloseModal);
   const currentImage = e.target;
-  document.addEventListener('keydown', onArrowsKeyImageChanger(e, currentImage));
+  // document.addEventListener('keydown', onArrowsKeyImageChanger(e, currentImage));
   lightboxRef.classList.add('is-open');
   lightboxImageRef.src = e.target.dataset.source;
   console.log(e.target.dataset.index);
@@ -65,3 +65,4 @@ function onEscapeCloseModal(e) {
   };
   closeModal()
 };
+

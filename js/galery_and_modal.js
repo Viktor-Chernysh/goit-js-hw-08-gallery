@@ -7,8 +7,8 @@ const closeLightboxBtn = document.querySelector('.lightbox__button');
 // const linkItemRef = document.querySelector('gallery__item');
 
 
-  galleryItems.forEach(arr => {
-    const galleryItem = `<li class="gallery__item">
+  const items = galleryItems.map(arr => {
+   return `<li class="gallery__item">
   <a
     class="gallery__link"
     href=${arr.original}
@@ -21,9 +21,9 @@ const closeLightboxBtn = document.querySelector('.lightbox__button');
       data-index=${galleryItems.indexOf(arr)}
     />
   </a>
-</li>`;
-    galleryRef.insertAdjacentHTML('beforeend', galleryItem)
-  });
+</li>`;   
+  }).join('');
+  galleryRef.innerHTML = items
 
 // const galleryArrow = document.querySelectorAll('.gallery__image');
 // console.log(galleryArrow);
@@ -35,13 +35,15 @@ function onImgClick(e) {
   // console.log(e.target.dataset.index);
 }
 
+let currentIndex;
+
 function openModal(e) {
   document.addEventListener('keydown', onEscapeCloseModal);
+   document.addEventListener('keydown', keyPress);
   const currentImage = e.target;
-  // document.addEventListener('keydown', onArrowsKeyImageChanger(e, currentImage));
   lightboxRef.classList.add('is-open');
   lightboxImageRef.src = e.target.dataset.source;
-  console.log(e.target.dataset.index);
+   currentIndex = e.target.dataset.index;
 };
 
 closeLightboxBtn.addEventListener('click', closeModal);
@@ -65,4 +67,3 @@ function onEscapeCloseModal(e) {
   };
   closeModal()
 };
-

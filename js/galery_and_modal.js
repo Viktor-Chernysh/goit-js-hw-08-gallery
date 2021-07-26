@@ -10,10 +10,11 @@ const closeLightboxBtn = document.querySelector('.lightbox__button');
   const items = galleryItems.map(arr => {
    return `<li class="gallery__item">
   <a
-    class="gallery__link"
+    class="gallery__link lazyload"
     href=${arr.original}
   >
     <img
+      load='lazy'
       class="gallery__image"
       src=${arr.preview}
       alt='${arr.description}'
@@ -47,7 +48,7 @@ function openModal(e) {
   lightboxRef.classList.add('is-open');
   lightboxImageRef.src = e.target.dataset.source;
   currentIndex = Number(e.target.dataset.index);
-  console.log(currentIndex);
+  // console.log(currentIndex);
 };
 
 closeLightboxBtn.addEventListener('click', closeModal);
@@ -73,15 +74,16 @@ function onEscapeCloseModal(e) {
 };
 
 
-console.log(galleryItems);
+// console.log(galleryItems);
 function nextImage  () {
-  if (currentIndex !== galleryItems.length - 1) {
+  if (currentIndex!== galleryItems.length - 1) {
     currentIndex += 1;
     lightboxImageRef.src = galleryItems[currentIndex].original;
-  };
-  if ((currentIndex === galleryItems.length - 1)) {
+  } else if ((currentIndex === galleryItems.length - 1)) {
     currentIndex = 0;
     lightboxImageRef.src = galleryItems[currentIndex].original;
+    
+    
   };
 };
 
@@ -103,6 +105,11 @@ function keyPress (e)  {
     nextImage();
   }
 };
+
+
+    
+    
+
 // document.addEventListener('keydown', onArrowsKeyImageChanger);
 // function nextImage  () {
 //   if (currentIndex >= 0 && currentIndex < galleryItems.length - 1) {

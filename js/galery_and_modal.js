@@ -39,7 +39,7 @@ let currentIndex;
 
 function openModal(e) {
   document.addEventListener('keydown', onEscapeCloseModal);
-   document.addEventListener('keydown', keyPress);
+  //  document.addEventListener('keydown', keyPress);
   const currentImage = e.target;
   lightboxRef.classList.add('is-open');
   lightboxImageRef.src = e.target.dataset.source;
@@ -67,3 +67,4 @@ function onEscapeCloseModal(e) {
   };
   closeModal()
 };
+

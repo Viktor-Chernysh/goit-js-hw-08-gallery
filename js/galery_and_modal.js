@@ -7,10 +7,10 @@ const closeLightboxBtn = document.querySelector('.lightbox__button');
 // const linkItemRef = document.querySelector('gallery__item');
 
 
-  const items = galleryItems.map(arr => {
+  const items = galleryItems.map((arr, index) => {
    return `<li class="gallery__item">
   <a
-    class="gallery__link lazyload"
+    class="gallery__link"
     href=${arr.original}
   >
     <img
@@ -19,7 +19,7 @@ const closeLightboxBtn = document.querySelector('.lightbox__button');
       src=${arr.preview}
       alt='${arr.description}'
       data-source=${arr.original}
-      data-index=${galleryItems.indexOf(arr)}
+      data-index=${index}
     />
   </a>
 </li>`;   
@@ -43,7 +43,7 @@ let currentIndex;
 
 function openModal(e) {
   document.addEventListener('keydown', onEscapeCloseModal);
-   document.addEventListener('keydown', keyPress);
+  document.addEventListener('keydown', keyPress);
   const currentImage = e.target;
   lightboxRef.classList.add('is-open');
   lightboxImageRef.src = e.target.dataset.source;
@@ -54,6 +54,8 @@ function openModal(e) {
 closeLightboxBtn.addEventListener('click', closeModal);
 function closeModal() {
   lightboxRef.classList.remove('is-open');
+  document.removeEventListener('keydown', onEscapeCloseModal);
+  document.removeEventListener('keydown', keyPress);
   lightboxImageRef.src = '';
 };
 
@@ -105,38 +107,3 @@ function keyPress (e)  {
     nextImage();
   }
 };
-
-
-    
-    
-
-// document.addEventListener('keydown', onArrowsKeyImageChanger);
-// function nextImage  () {
-//   if (currentIndex >= 0 && currentIndex < galleryItems.length - 1) {
-//     currentIndex += 1;
-//     lightboxImageRef.src = galleryItems[currentIndex].original;
-//   };
-//   if ((currentIndex === galleryItems.length - 1)) {
-//     currentIndex = 0;
-//     lightboxImageRef.src = galleryItems[currentIndex].original;
-//   };
-// };
-
-// function prevImage () {
-//   if (currentIndex > 0 && currentIndex <= galleryItems.length - 1) {
-//     currentIndex -= 1;
-//     lightboxImageRef.src = galleryItems[currentIndex].original;
-//   } else if (currentIndex === 0) {
-//     currentIndex = galleryItems.length - 1;
-//     lightboxImageRef.src = galleryItems[currentIndex].original;
-//   }
-// };
-// function keyPress (e)  {
-//   if (e.code === "ArrowLeft") {
-//     prevImage();
-//   }
-
-//   if (e.code === "ArrowRight") {
-//     nextImage();
-//   }
-// };
